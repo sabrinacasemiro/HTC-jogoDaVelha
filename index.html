@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href="styles/reset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
     <title>Jogo da Velha</title>
 </head>
+
 <body>
-    
+    <section class="container-left">
+        <div class="players-wrapper">
+            <input type='text' placeholder="Jogador 1" class="imput-player imput-player1"></input>
+            <div class="box-player-bot">
+                <input type='text' placeholder="Jogador 2" class="imput-player imput-player2"></input>
+                <div class="box-switcher">
+                    <div class="switcher"></div>
+                </div>
+            </div>
+        </div>
+        <div class="md-wrapper">
+            <span class="md-title">Tipo de Partida</span>
+            <div class="md3-md5">
+                <span class="type-of-match md3">Melhor de 3</span>
+                <div class="box-type-switcher">
+                    <div class="type-switcher"></div>
+                </div>
+                <span class="type-of-match md5">Melhor de 5</span>
+            </div>
+        </div>
+        <button class="button-start">Jogar</button>
+    </section>
+    <section class="container-center">
+
+    </section>
+    <section class="container-rigth">
+
+    </section>
+    <script src='index.js'></script>
 </body>
+
 </html>
