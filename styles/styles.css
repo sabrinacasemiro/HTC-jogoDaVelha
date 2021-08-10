@@ -280,6 +280,71 @@ body{
     height: 100%;
     width: 44%;
     background-color: #F5B3D4;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.scoreboard-wrapper{
+    height: 100px;
+    width: 400px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    color: #F5B3D4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 70px;
+}
+
+.scoreboard-title{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.point-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.point{
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.winner-scoreboard{
+    font-size: 16px;
+    font-weight: 500;
+    color: #828282;
+    margin: 0 77px;
+}
+
+.playing-field-wrapper{
+    height: 510px;
+    width: 510px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.playing-field{
+    height: 160px;
+    width: 160px;
+    border-radius: 15px;
+    border: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    outline: none;
+}
+
+.playing-field:focus{
+    border: 1px solid #FF73A6;
+    transition-duration: 300ms;
 }
 
 .container-rigth{
