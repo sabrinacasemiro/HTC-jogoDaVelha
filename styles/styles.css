@@ -139,15 +139,18 @@ body{
     transform: translateX(20px);
 }
 
-.button-start{
+.button{
     height: 54px;
     width: 317px;
-    background-color: #45F391;
     font-size: 24px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.button-start{
+    background-color: #45F391;
     color: #FFFFFF;
     border: 1px solid #45F391;
-    border-radius: 10px;
-    cursor: pointer;
     margin-bottom: 38px;
 }
 
@@ -162,6 +165,113 @@ body{
 }
 
 .button-stop:focus{
+    border: 1px solid #FF73A6;
+    transition-duration: 300ms;
+}
+
+.match-history-wrapper{
+    height: 234px;
+    width: 317px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 28px;
+}
+
+.match-history-wrapper:hover{
+    overflow: auto;
+}
+
+.match-history-wrapper::-webkit-scrollbar{
+    width: 3px;
+}
+
+.match-history-wrapper::-webkit-scrollbar-track{
+    background-color: #FFA8BB;
+}
+
+.match-history-wrapper::-webkit-scrollbar-thumb{
+    border-radius: 2px;
+    background-color: #FA547D;
+}
+
+.match-history-title{
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.match-history-list{
+    height: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}   
+
+.match-history-card{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.winner-history-wraper{
+    height: 100%;
+    width: 168px;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 14px;
+}
+
+.winner-history-title{
+    font-weight: 700;
+    color: #45F391;
+}
+
+.winner-history-name{
+    color: #828282;
+}
+
+.scenery-history-title{
+    font-size: 14px
+}
+
+.scenery-history-wrapper{
+    height: 100%;
+    width: 49px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.field-scenery-history{
+    height: 15px;
+    width: 15px;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+    color: #828282;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-restart{
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    color: #E09FC4;
+}
+
+.button-restart:focus{
     border: 1px solid #FF73A6;
     transition-duration: 300ms;
 }
