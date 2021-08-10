@@ -351,4 +351,81 @@ body{
     height: 100%;
     width: 28%;
     background-color: #E09FC4;
+    padding: 50px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-history-wrapper{
+    height: 662px;
+    width: 317px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-history-title{
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.play-history-list{
+    height: 640px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.play-history-card{
+    height: 50px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: #828282;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.play-history-card:focus{
+    border: 1px solid #FF73A6;
+    transition-duration: 300ms;
+}
+
+.play-history-move{
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.play-history-player-wrapper{
+    height: 33px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+    font-size: 14px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.play-history-player{
+    font-weight: 700;
+}
+
+.play-history-field{
+    color: #E09FC4;
+}
+
+.favicon{
+    width: 75px;
+    position: absolute;
+    right: 70px;
+    bottom: 20px;
+    opacity: 50%;
 }
