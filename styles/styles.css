@@ -145,6 +145,7 @@ body{
     font-size: 24px;
     cursor: pointer;
     border-radius: 10px;
+    outline: none;
 }
 
 .button-start{
@@ -326,7 +327,6 @@ body{
     height: 510px;
     width: 510px;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
@@ -340,6 +340,9 @@ body{
     background-color: #FFFFFF;
     cursor: pointer;
     outline: none;
+    font-size: 130px;
+    color: #828282;
+    font-weight: 700;
 }
 
 .playing-field:focus{
@@ -392,6 +395,7 @@ body{
     color: #828282;
     padding: 10px;
     cursor: pointer;
+    outline: none;
 }
 
 .play-history-card:focus{
