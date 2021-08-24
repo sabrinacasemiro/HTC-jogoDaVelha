@@ -23,6 +23,9 @@ const $namePlayer2 = document.querySelector('.imput-player2')
 const pointPlaying1 = document.querySelector('.point-player1')
 const pointPlaying2 = document.querySelector('.point-player2')
 
+const $namePlayerList = document.querySelectorAll('.imput-player')
+const $playersWrapper = document.querySelector('.players-wrapper')
+
 const horizontal1 = [$playingField0, $playingField1, $playingField2]
 const horizontal2 = [$playingField3, $playingField4, $playingField5]
 const horizontal3 = [$playingField6, $playingField7, $playingField8]
@@ -46,10 +49,11 @@ $playingField0.addEventListener('click', function(){
     if($playingField0.textContent || !start) return
     printMove($playingField0)
     verifyWinner()
-    printWinner()
-    toggleMoveVar()
     if(winner){
+        stopGameForAMoment(1500)
         addPoint(winner, 1)
+        printWinner()
+        printMatch()
         printPoint()
         setTimeout(function(){
             resetField()
@@ -57,142 +61,159 @@ $playingField0.addEventListener('click', function(){
             resetWinnerScoreboard()
         }, 1500)
     }
+    toggleMoveVar()
 })
 
 $playingField1.addEventListener('click', function(){
     if($playingField1.textContent || !start) return
     printMove($playingField1)
     verifyWinner()
-    printWinner()
-    toggleMoveVar()
     if(winner){
+        stopGameForAMoment(1500)
         addPoint(winner, 1)
+        printWinner()
+        printMatch()
         printPoint()
-       setTimeout(function(){
+        setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
         }, 1500)
     }
+    toggleMoveVar()
 })
 
 $playingField2.addEventListener('click', function(){
     if($playingField2.textContent || !start) return
     printMove($playingField2)
     verifyWinner()
-    printWinner()
-    toggleMoveVar()
     if(winner){
+        stopGameForAMoment(1500)
         addPoint(winner, 1)
+        printWinner()
+        printMatch()
         printPoint()
-       setTimeout(function(){
+        setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
         }, 1500)
     }
+    toggleMoveVar()
 })
 
 $playingField3.addEventListener('click', function(){
     if($playingField3.textContent || !start) return
     printMove($playingField3)
     verifyWinner()
-    printWinner()
-    toggleMoveVar()
     if(winner){
+        stopGameForAMoment(1500)
         addPoint(winner, 1)
+        printWinner()
+        printMatch()
         printPoint()
-       setTimeout(function(){
+        setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
         }, 1500)
     }
+    toggleMoveVar()
 })
 
 $playingField4.addEventListener('click', function(){
     if($playingField4.textContent || !start) return
     printMove($playingField4)
     verifyWinner()
-    printWinner()
-    toggleMoveVar()
     if(winner){
+        stopGameForAMoment(1500)
         addPoint(winner, 1)
+        printWinner()
+        printMatch()
         printPoint()
-       setTimeout(function(){
+        setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
         }, 1500)
     }
+    toggleMoveVar()
 })
 
 $playingField5.addEventListener('click', function(){
     if($playingField5.textContent || !start) return
     printMove($playingField5)
     verifyWinner()
-    printWinner()
-    toggleMoveVar()
     if(winner){
+        stopGameForAMoment(1500)
         addPoint(winner, 1)
+        printWinner()
+        printMatch()
         printPoint()
-       setTimeout(function(){
+        setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
         }, 1500)
     }
+    toggleMoveVar()
 })
 
 $playingField6.addEventListener('click', function(){
     if($playingField6.textContent || !start) return
     printMove($playingField6)
     verifyWinner()
-    printWinner()
-    toggleMoveVar()
     if(winner){
+        stopGameForAMoment(1500)
         addPoint(winner, 1)
+        printWinner()
+        printMatch()
         printPoint()
-       setTimeout(function(){
+        setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
         }, 1500)
     }
+    toggleMoveVar()
 })
 
 $playingField7.addEventListener('click', function(){
     if($playingField7.textContent || !start) return
     printMove($playingField7)
     verifyWinner()
-    printWinner()
-    toggleMoveVar()
     if(winner){
+        stopGameForAMoment(1500)
         addPoint(winner, 1)
         printPoint()
-       setTimeout(function(){
+        printWinner()
+        printMatch()
+        setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
         }, 1500)
     }
+    toggleMoveVar()
 })
 
 $playingField8.addEventListener('click', function(){
     if($playingField8.textContent || !start) return
     printMove($playingField8)
-    verifyWinner()
-    printWinner()
-    toggleMoveVar() 
+    verifyWinner() 
     if(winner){
+        stopGameForAMoment(1500)
         addPoint(winner, 1)
         printPoint()
-       setTimeout(function(){
+        printWinner()
+        printMatch()
+        setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
         }, 1500)
     }
+    toggleMoveVar() 
 })
 
 $switcherBot.addEventListener('click', function(){
@@ -205,6 +226,7 @@ $switcherMD.addEventListener('click', function(){
 
 $buttonStart.addEventListener('click', function(){
     $buttonStart.classList.toggle('button-stop')
+    if(verifyPlayers()) return
     if(start){
         start = false
         $buttonStart.textContent = 'Jogar'
@@ -258,16 +280,30 @@ function checkField(){
 }
 
 function printWinner(){
-    if (winner == currentMove){
-        $winnerScoreboard.textContent = currentMove + ' Venceu!'
-    } else if(checkField()){
-        $winnerScoreboard.textContent = 'Xii... deu velha!'
+    if (winner === 'X'){
+        $winnerScoreboard.textContent = $namePlayer1.value + ' Venceu!'
+    } else if(winner === 'O'){
+        $winnerScoreboard.textContent = $namePlayer2.value + ' Venceu!'
+    }
+}
+
+function printMatch(){
+    if(checkField()){
+        $winnerScoreboard.textContent = 'Xiii... deu velha!'
     }
 }
 
 function printPoint(){
-    pointPlaying1.textContent = scorePlayer1
-    pointPlaying2.textContent = scorePlayer2
+    if(scorePlayer1 < 10){
+        pointPlaying1.textContent = '0' + scorePlayer1
+    } else {
+        pointPlaying1.textContent = scorePlayer1
+    }
+    if(scorePlayer2 < 10){
+        pointPlaying2.textContent = '0' + scorePlayer2
+    } else {
+        pointPlaying2.textContent = scorePlayer2
+    }
 }
 
 function resetField(){
@@ -283,4 +319,30 @@ function resetVar(){
 
 function resetWinnerScoreboard(){
     $winnerScoreboard.textContent = ''
+}
+
+function stopGameForAMoment(time){
+    start = false
+
+    setTimeout(function(){
+        start = true
+    }, time)
+}
+
+function verifyPlayers(){
+    let error = false
+    for($namePlayer of $namePlayerList){
+        const value = $namePlayer.value
+        console.log(value)
+        if(!value){
+           $playersWrapper.classList.add('error')
+            error = true
+            start = true
+            $buttonStart.classList.remove('button-stop')
+
+            setTimeout(function(){
+               $playersWrapper.classList.remove('error')
+            }, 1500)
+        }
+    }
 }
