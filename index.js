@@ -2,6 +2,7 @@ const $switcherBot = document.querySelector(".box-switcher")
 const $switcherMD = document.querySelector('.box-type-switcher')
 
 const $buttonStart = document.querySelector('.button-start')
+const $buttonRestart = document.querySelector('.button-restart')
 
 const $playingField0 = document.querySelector('.playing-field0')
 const $playingField1 = document.querySelector('.playing-field1')
@@ -85,7 +86,7 @@ function checkField(){
 
     for(const field of $playingFieldList){
         if(!field.textContent){
-            itsFull = false
+            itsFull =   false
         }
     }
     return itsFull
@@ -128,6 +129,24 @@ function resetVar(){
 
 function resetWinnerScoreboard(){
     $winnerScoreboard.textContent = ''
+}
+
+function resetMoveHistory(){
+    $playHistoryList.innerHTML = ''
+}
+
+function resetPointScoreboard(){
+    pointPlaying1.textContent = '00'
+    pointPlaying2.textContent = '00'
+}
+
+function resetScorePlayer(){
+    scorePlayer1 = 0
+    scorePlayer2 = 0
+}
+
+function resetMatchHistory(){
+    $matchHistoryList.innerHTML = ''
 }
 
 function stopGameForAMoment(time){
@@ -191,10 +210,6 @@ function printMoveHistory(move, fieldIndex){
                     </div>
                 </button>
     `
-}
-
-function resetMoveHistory(){
-    $playHistoryList.innerHTML = ''
 }
 
 function getPlayerName(playerMove){
@@ -424,4 +439,14 @@ $buttonStart.addEventListener('click', function(){
         start = true
         $buttonStart.textContent = 'Parar'
     }
+})
+
+$buttonRestart.addEventListener('click', function(){
+    resetField()
+    resetVar()
+    resetWinnerScoreboard()
+    resetMoveHistory()
+    resetPointScoreboard()
+    resetScorePlayer()
+    resetMatchHistory()
 })
