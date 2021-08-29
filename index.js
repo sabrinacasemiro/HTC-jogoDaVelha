@@ -14,6 +14,16 @@ const $playingField6 = document.querySelector('.playing-field6')
 const $playingField7 = document.querySelector('.playing-field7')
 const $playingField8 = document.querySelector('.playing-field8')
 
+const fieldSceneryHistory0 = document.querySelector('.field-scenery-history0')
+const fieldSceneryHistory1 = document.querySelector('.field-scenery-history1')
+const fieldSceneryHistory2 = document.querySelector('.field-scenery-history2')
+const fieldSceneryHistory3 = document.querySelector('.field-scenery-history3')
+const fieldSceneryHistory4 = document.querySelector('.field-scenery-history4')
+const fieldSceneryHistory5 = document.querySelector('.field-scenery-history5')
+const fieldSceneryHistory6 = document.querySelector('.field-scenery-history6')
+const fieldSceneryHistory7 = document.querySelector('.field-scenery-history7')
+const fieldSceneryHistory8 = document.querySelector('.field-scenery-history8')
+
 const $playingFieldList = document.querySelectorAll('.playing-field')
 
 const $winnerScoreboard = document.querySelector(".winner-scoreboard")
@@ -48,6 +58,7 @@ let winner =  ''
 let scorePlayer1 = 0
 let scorePlayer2 = 0
 let start = false
+let winnerHistoryName = ''
 
 function toggleMoveVar(){
     if(currentMove == 'O'){
@@ -175,25 +186,55 @@ function verifyPlayers(){
 }
 
 function printMatchHistory(){
-    $matchHistoryList.innerHTML +=
-    `<li class="match-history-card">
-                    <div class="winner-history-wraper">
-                        <span class="winner-history-title">Vencedor</span>
-                        <span class="winner-history-name">Nome do Vencedor</span>
-                    </div>
-                    <span class="scenery-history-title">Cenário</span>
-                    <div class="scenery-history-wrapper">
-                        <div class="field-scenery-history field-scenery-history1">X</div>
-                        <div class="field-scenery-history field-scenery-history2"></div>
-                        <div class="field-scenery-history field-scenery-history3"></div>
-                        <div class="field-scenery-history field-scenery-history4"></div>
-                        <div class="field-scenery-history field-scenery-history5"></div>
-                        <div class="field-scenery-history field-scenery-history6"></div>
-                        <div class="field-scenery-history field-scenery-history7"></div>
-                        <div class="field-scenery-history field-scenery-history8"></div>
-                        <div class="field-scenery-history field-scenery-history9"></div>
-                    </div>
-                </li>`
+    const scenery = getScenery()
+
+    const _container = document.createElement('li')
+    const _winnerWrapper = document.createElement('div')
+    const _winnerTitle = document.createElement('span')
+    const _winnerName = document.createElement('span')
+    const _sceneryTitle = document.createElement('span')
+    const _sceneryWrapper = document.createElement('div')
+
+    _container.classList.add('match-history-card')
+    _winnerWrapper.classList.add('winner-history-wraper')
+    _winnerTitle.classList.add('winner-history-title')
+    _winnerName.classList.add('winner-history-name')
+    _sceneryTitle.classList.add('scenery-history-title')
+    _sceneryWrapper.classList.add('scenery-history-wrapper')
+
+    $matchHistoryList.appendChild(_container)
+    _container.appendChild(_winnerWrapper)
+    _container.appendChild(_sceneryTitle)
+    _container.appendChild(_sceneryWrapper)
+    _winnerWrapper.appendChild(_winnerTitle)
+    _winnerWrapper.appendChild(_winnerName)
+
+    _winnerTitle.textContent = 'Vencedor'
+    _winnerName.textContent = printWinnerHistory()
+    _sceneryTitle.textContent = 'Cenário'
+
+    for(const move of scenery){
+        const _move = document.createElement('span')
+        _move.classList.add('field-scenery-history')
+        _move.textContent = move
+        _sceneryWrapper.appendChild(_move)
+    }
+}
+
+function printWinnerHistory(){
+    if(winner){
+        return $winnerScoreboard.textContent
+    } 
+}
+
+function getScenery(){
+    const scenery = []
+
+    for(const $playingField of $playingFieldList){
+        const move = $playingField.textContent
+        scenery.push(move)
+    }
+    return scenery
 }
 
 function printMoveHistory(move, fieldIndex){
@@ -214,7 +255,7 @@ function printMoveHistory(move, fieldIndex){
 
 function getPlayerName(playerMove){
     const player1value = $namePlayer1.value
-    const player2value = $namePlayer1.value
+    const player2value = $namePlayer2.value
 
     if(playerMove === 'X'){
         return player1value
@@ -226,7 +267,7 @@ function getPlayerName(playerMove){
 $playingField0.addEventListener('click', function(){
     if($playingField0.textContent || !start) return
     printMove($playingField0)
-    printMoveHistory(currentMove, 0)
+    printMoveHistory(currentMove, 'Primeiro Campo')
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -234,13 +275,13 @@ $playingField0.addEventListener('click', function(){
         printWinner()
         printMatch()
         printPoint()
+        printMatchHistory()
         setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
             resetMoveHistory()
         }, 1500)
-        printMatchHistory()
     }
     toggleMoveVar()
 })
@@ -248,7 +289,7 @@ $playingField0.addEventListener('click', function(){
 $playingField1.addEventListener('click', function(){
     if($playingField1.textContent || !start) return
     printMove($playingField1)
-    printMoveHistory(currentMove, 1)
+    printMoveHistory(currentMove, 'Segundo Campo')
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -256,13 +297,13 @@ $playingField1.addEventListener('click', function(){
         printWinner()
         printMatch()
         printPoint()
+        printMatchHistory()
         setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
             resetMoveHistory()
         }, 1500)
-        printMatchHistory()
     }
     toggleMoveVar()
 })
@@ -270,7 +311,7 @@ $playingField1.addEventListener('click', function(){
 $playingField2.addEventListener('click', function(){
     if($playingField2.textContent || !start) return
     printMove($playingField2)
-    printMoveHistory(currentMove, 2)
+    printMoveHistory(currentMove, 'Terceiro Campo')
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -278,13 +319,13 @@ $playingField2.addEventListener('click', function(){
         printWinner()
         printMatch()
         printPoint()
+        printMatchHistory()
         setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
             resetMoveHistory()
         }, 1500)
-        printMatchHistory()
     }
     toggleMoveVar()
 })
@@ -292,7 +333,7 @@ $playingField2.addEventListener('click', function(){
 $playingField3.addEventListener('click', function(){
     if($playingField3.textContent || !start) return
     printMove($playingField3)
-    printMoveHistory(currentMove, 3)
+    printMoveHistory(currentMove, 'Quarto Campo')
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -300,13 +341,13 @@ $playingField3.addEventListener('click', function(){
         printWinner()
         printMatch()
         printPoint()
+        printMatchHistory()
         setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
             resetMoveHistory()
         }, 1500)
-        printMatchHistory()
     }
     toggleMoveVar()
 })
@@ -314,7 +355,7 @@ $playingField3.addEventListener('click', function(){
 $playingField4.addEventListener('click', function(){
     if($playingField4.textContent || !start) return
     printMove($playingField4)
-    printMoveHistory(currentMove, 4)
+    printMoveHistory(currentMove, 'Quinto Campo')
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -322,13 +363,13 @@ $playingField4.addEventListener('click', function(){
         printWinner()
         printMatch()
         printPoint()
+        printMatchHistory()
         setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
             resetMoveHistory()
         }, 1500)
-        printMatchHistory()
     }
     toggleMoveVar()
 })
@@ -336,7 +377,7 @@ $playingField4.addEventListener('click', function(){
 $playingField5.addEventListener('click', function(){
     if($playingField5.textContent || !start) return
     printMove($playingField5)
-    printMoveHistory(currentMove, 5)
+    printMoveHistory(currentMove, 'Sexto Campo')
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -344,13 +385,13 @@ $playingField5.addEventListener('click', function(){
         printWinner()
         printMatch()
         printPoint()
+        printMatchHistory()
         setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
             resetMoveHistory()
         }, 1500)
-        printMatchHistory()
     }
     toggleMoveVar()
 })
@@ -358,7 +399,7 @@ $playingField5.addEventListener('click', function(){
 $playingField6.addEventListener('click', function(){
     if($playingField6.textContent || !start) return
     printMove($playingField6)
-    printMoveHistory(currentMove, 6)
+    printMoveHistory(currentMove, 'Sétimo Campo')
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -366,13 +407,13 @@ $playingField6.addEventListener('click', function(){
         printWinner()
         printMatch()
         printPoint()
+        printMatchHistory()
         setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
             resetMoveHistory()
         }, 1500)
-        printMatchHistory()
     }
     toggleMoveVar()
 })
@@ -380,7 +421,7 @@ $playingField6.addEventListener('click', function(){
 $playingField7.addEventListener('click', function(){
     if($playingField7.textContent || !start) return
     printMove($playingField7)
-    printMoveHistory(currentMove, 7)
+    printMoveHistory(currentMove, 'Oitavo Campo')
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -388,13 +429,13 @@ $playingField7.addEventListener('click', function(){
         printPoint()
         printWinner()
         printMatch()
+        printMatchHistory()
         setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
             resetMoveHistory()
         }, 1500)
-        printMatchHistory()
     }
     toggleMoveVar()
 })
@@ -402,7 +443,7 @@ $playingField7.addEventListener('click', function(){
 $playingField8.addEventListener('click', function(){
     if($playingField8.textContent || !start) return
     printMove($playingField8)
-    printMoveHistory(currentMove, 8)
+    printMoveHistory(currentMove, 'Nono Campo')
     verifyWinner() 
     if(winner){
         stopGameForAMoment(1500)
@@ -410,13 +451,13 @@ $playingField8.addEventListener('click', function(){
         printPoint()
         printWinner()
         printMatch()
+        printMatchHistory()
         setTimeout(function(){
             resetField()
             resetVar()
             resetWinnerScoreboard()
             resetMoveHistory()
         }, 1500)
-        printMatchHistory()
     }
     toggleMoveVar() 
 })
