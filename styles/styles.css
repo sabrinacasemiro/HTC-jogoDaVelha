@@ -208,6 +208,7 @@ body{
     width: 100%;
     display: flex;
     flex-direction: column;
+    
 }   
 
 .match-history-card{
@@ -218,6 +219,7 @@ body{
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
+    animation: card-history-move 500ms;
 }
 
 .winner-history-wraper{
@@ -454,5 +456,14 @@ body{
     }
     100%{
         transform: translateX(0);
+    }
+}
+
+@keyframes card-history-move{
+    0%{
+        transform: translateX(-300px);
+    }
+    100%{
+        transform: translateX(0px) scaleX(1);
     }
 }
