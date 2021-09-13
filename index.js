@@ -109,7 +109,7 @@ function printWinner(){
 }
 
 function printMatch(){
-    if(checkField()){
+    if(checkField() && winner != 'X' && winner != 'O'){
         $winnerScoreboard.textContent = 'Xiii... deu velha!'
     }
 }
@@ -264,9 +264,12 @@ function getPlayerName(playerMove){
     }
 }
 
-$playingField0.addEventListener('click', function(){
-    if($playingField0.textContent || !start) return
-    printMove($playingField0)
+for(let i = 0; i < $playingFieldList.length; i++){
+    const $playingField = $playingFieldList[i]
+
+    $playingField.addEventListener('click', function(){
+        if($playingField.textContent || !start) return
+    printMove($playingField)
     printMoveHistory(currentMove, 'Primeiro Campo')
     verifyWinner()
     if(winner){
@@ -284,183 +287,8 @@ $playingField0.addEventListener('click', function(){
         }, 1500)
     }
     toggleMoveVar()
-})
-
-$playingField1.addEventListener('click', function(){
-    if($playingField1.textContent || !start) return
-    printMove($playingField1)
-    printMoveHistory(currentMove, 'Segundo Campo')
-    verifyWinner()
-    if(winner){
-        stopGameForAMoment(1500)
-        addPoint(winner, 1)
-        printWinner()
-        printMatch()
-        printPoint()
-        printMatchHistory()
-        setTimeout(function(){
-            resetField()
-            resetVar()
-            resetWinnerScoreboard()
-            resetMoveHistory()
-        }, 1500)
-    }
-    toggleMoveVar()
-})
-
-$playingField2.addEventListener('click', function(){
-    if($playingField2.textContent || !start) return
-    printMove($playingField2)
-    printMoveHistory(currentMove, 'Terceiro Campo')
-    verifyWinner()
-    if(winner){
-        stopGameForAMoment(1500)
-        addPoint(winner, 1)
-        printWinner()
-        printMatch()
-        printPoint()
-        printMatchHistory()
-        setTimeout(function(){
-            resetField()
-            resetVar()
-            resetWinnerScoreboard()
-            resetMoveHistory()
-        }, 1500)
-    }
-    toggleMoveVar()
-})
-
-$playingField3.addEventListener('click', function(){
-    if($playingField3.textContent || !start) return
-    printMove($playingField3)
-    printMoveHistory(currentMove, 'Quarto Campo')
-    verifyWinner()
-    if(winner){
-        stopGameForAMoment(1500)
-        addPoint(winner, 1)
-        printWinner()
-        printMatch()
-        printPoint()
-        printMatchHistory()
-        setTimeout(function(){
-            resetField()
-            resetVar()
-            resetWinnerScoreboard()
-            resetMoveHistory()
-        }, 1500)
-    }
-    toggleMoveVar()
-})
-
-$playingField4.addEventListener('click', function(){
-    if($playingField4.textContent || !start) return
-    printMove($playingField4)
-    printMoveHistory(currentMove, 'Quinto Campo')
-    verifyWinner()
-    if(winner){
-        stopGameForAMoment(1500)
-        addPoint(winner, 1)
-        printWinner()
-        printMatch()
-        printPoint()
-        printMatchHistory()
-        setTimeout(function(){
-            resetField()
-            resetVar()
-            resetWinnerScoreboard()
-            resetMoveHistory()
-        }, 1500)
-    }
-    toggleMoveVar()
-})
-
-$playingField5.addEventListener('click', function(){
-    if($playingField5.textContent || !start) return
-    printMove($playingField5)
-    printMoveHistory(currentMove, 'Sexto Campo')
-    verifyWinner()
-    if(winner){
-        stopGameForAMoment(1500)
-        addPoint(winner, 1)
-        printWinner()
-        printMatch()
-        printPoint()
-        printMatchHistory()
-        setTimeout(function(){
-            resetField()
-            resetVar()
-            resetWinnerScoreboard()
-            resetMoveHistory()
-        }, 1500)
-    }
-    toggleMoveVar()
-})
-
-$playingField6.addEventListener('click', function(){
-    if($playingField6.textContent || !start) return
-    printMove($playingField6)
-    printMoveHistory(currentMove, 'Sétimo Campo')
-    verifyWinner()
-    if(winner){
-        stopGameForAMoment(1500)
-        addPoint(winner, 1)
-        printWinner()
-        printMatch()
-        printPoint()
-        printMatchHistory()
-        setTimeout(function(){
-            resetField()
-            resetVar()
-            resetWinnerScoreboard()
-            resetMoveHistory()
-        }, 1500)
-    }
-    toggleMoveVar()
-})
-
-$playingField7.addEventListener('click', function(){
-    if($playingField7.textContent || !start) return
-    printMove($playingField7)
-    printMoveHistory(currentMove, 'Oitavo Campo')
-    verifyWinner()
-    if(winner){
-        stopGameForAMoment(1500)
-        addPoint(winner, 1)
-        printPoint()
-        printWinner()
-        printMatch()
-        printMatchHistory()
-        setTimeout(function(){
-            resetField()
-            resetVar()
-            resetWinnerScoreboard()
-            resetMoveHistory()
-        }, 1500)
-    }
-    toggleMoveVar()
-})
-
-$playingField8.addEventListener('click', function(){
-    if($playingField8.textContent || !start) return
-    printMove($playingField8)
-    printMoveHistory(currentMove, 'Nono Campo')
-    verifyWinner() 
-    if(winner){
-        stopGameForAMoment(1500)
-        addPoint(winner, 1)
-        printPoint()
-        printWinner()
-        printMatch()
-        printMatchHistory()
-        setTimeout(function(){
-            resetField()
-            resetVar()
-            resetWinnerScoreboard()
-            resetMoveHistory()
-        }, 1500)
-    }
-    toggleMoveVar() 
-})
+    })
+}
 
 $switcherBot.addEventListener('click', function(){
     $switcherBot.classList.toggle('switcher-active')
