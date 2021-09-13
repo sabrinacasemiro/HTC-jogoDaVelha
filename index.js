@@ -14,16 +14,6 @@ const $playingField6 = document.querySelector('.playing-field6')
 const $playingField7 = document.querySelector('.playing-field7')
 const $playingField8 = document.querySelector('.playing-field8')
 
-const fieldSceneryHistory0 = document.querySelector('.field-scenery-history0')
-const fieldSceneryHistory1 = document.querySelector('.field-scenery-history1')
-const fieldSceneryHistory2 = document.querySelector('.field-scenery-history2')
-const fieldSceneryHistory3 = document.querySelector('.field-scenery-history3')
-const fieldSceneryHistory4 = document.querySelector('.field-scenery-history4')
-const fieldSceneryHistory5 = document.querySelector('.field-scenery-history5')
-const fieldSceneryHistory6 = document.querySelector('.field-scenery-history6')
-const fieldSceneryHistory7 = document.querySelector('.field-scenery-history7')
-const fieldSceneryHistory8 = document.querySelector('.field-scenery-history8')
-
 const $playingFieldList = document.querySelectorAll('.playing-field')
 
 const $winnerScoreboard = document.querySelector(".winner-scoreboard")
@@ -40,16 +30,16 @@ const $playersWrapper = document.querySelector('.players-wrapper')
 const $matchHistoryList = document.querySelector('.match-history-list')
 const $playHistoryList = document.querySelector('.play-history-list')
 
-const horizontal1 = [$playingField0, $playingField1, $playingField2]
-const horizontal2 = [$playingField3, $playingField4, $playingField5]
-const horizontal3 = [$playingField6, $playingField7, $playingField8]
+const horizontal1 = [$playingFieldList[0], $playingFieldList[1], $playingFieldList[2]]
+const horizontal2 = [$playingFieldList[3], $playingFieldList[4], $playingFieldList[5]]
+const horizontal3 = [$playingFieldList[6], $playingFieldList[7], $playingFieldList[8]]
 
-const vertical1 = [$playingField0, $playingField3, $playingField6]
-const vertical2 = [$playingField1, $playingField4, $playingField7]
-const vertical3 = [$playingField2, $playingField5, $playingField8]
+const vertical1 = [$playingFieldList[0], $playingFieldList[3], $playingFieldList[6]]
+const vertical2 = [$playingFieldList[1], $playingFieldList[4], $playingFieldList[7]]
+const vertical3 = [$playingFieldList[2], $playingFieldList[5], $playingFieldList[8]]
 
-const diagonal1 = [$playingField0, $playingField4, $playingField8]
-const diagonal2 = [$playingField2, $playingField4, $playingField6]
+const diagonal1 = [$playingFieldList[0], $playingFieldList[4], $playingFieldList[8]]
+const diagonal2 = [$playingFieldList[2], $playingFieldList[4], $playingFieldList[6]]
 
 const linesToVerify = [horizontal1, horizontal2, horizontal3, vertical1, vertical2, vertical3, diagonal1, diagonal2]
 
@@ -58,6 +48,7 @@ let winner =  ''
 let scorePlayer1 = 0
 let scorePlayer2 = 0
 let start = false
+let bot = false
 let winnerHistoryName = ''
 
 function toggleMoveVar(){
@@ -264,13 +255,27 @@ function getPlayerName(playerMove){
     }
 }
 
-for(let i = 0; i < $playingFieldList.length; i++){
-    const $playingField = $playingFieldList[i]
+function getPositionText(index){
+    const dicionaryText = ['Primeiro Campo', 'Segundo Campo', 'Terceiro Campo', 'Quarto Campo', 'Quinto Campo', 'Sexto Campo', 'Setimo Campo', 'Oitavo Campo', 'Nono Campo']
 
-    $playingField.addEventListener('click', function(){
-        if($playingField.textContent || !start) return
+    return dicionaryText[index]
+}
+
+function botMoveIndex(){
+    return Math.floor(Math.random() * 9) 
+}
+
+function botPlay(){
+    const botMove = botMoveIndex()
+    const $playingField = $playingFieldList[botMove]
+    const itsfull = checkField()
+
+    if($playingField.textContent && !itsfull) return botPlay()
+
+    if($playingField.textContent || !start) return
+        const positionText = getPositionText(botMove)
     printMove($playingField)
-    printMoveHistory(currentMove, 'Primeiro Campo')
+    printMoveHistory(currentMove, positionText)
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -287,11 +292,40 @@ for(let i = 0; i < $playingFieldList.length; i++){
         }, 1500)
     }
     toggleMoveVar()
+}
+
+for(let i = 0; i < $playingFieldList.length; i++){
+    const $playingField = $playingFieldList[i]
+    
+    $playingField.addEventListener('click', function(){
+        if($playingField.textContent || !start) return
+        const positionText = getPositionText(i)
+    printMove($playingField)
+    printMoveHistory(currentMove, positionText)
+    verifyWinner()
+    if(winner){
+        stopGameForAMoment(1500)
+        addPoint(winner, 1)
+        printWinner()
+        printMatch()
+        printPoint()
+        printMatchHistory()
+        setTimeout(function(){
+            resetField()
+            resetVar()
+            resetWinnerScoreboard()
+            resetMoveHistory()
+        }, 1500)
+    }
+    toggleMoveVar()
+    bot && botPlay()
     })
+
 }
 
 $switcherBot.addEventListener('click', function(){
     $switcherBot.classList.toggle('switcher-active')
+    bot = !bot
 })
 
 $switcherMD.addEventListener('click', function(){
