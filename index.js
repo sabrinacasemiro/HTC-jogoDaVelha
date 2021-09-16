@@ -231,17 +231,29 @@ function getScenery(){
 function printMoveHistory(move, fieldIndex){
     const playerName = getPlayerName(move)
 
-    $playHistoryList.innerHTML += `
-    <button class="play-history-card">
-                    <div class="play-history-move">
-                        <span>${move}</span>
-                    </div>
-                    <div class="play-history-player-wrapper">
-                        <span class="play-history-player">${playerName}</span>
-                        <span class="play-history-field">${fieldIndex}</span>
-                    </div>
-                </button>
-    `
+    const _playHistoryCard = document.createElement('button')
+    const _playHistoryMove = document.createElement('div')
+    const _spanMove = document.createElement('span')
+    const _playHistoryPlayerWrapper = document.createElement('div')
+    const _playHistoryPlayer = document.createElement('span')
+    const _playHistoryField = document.createElement('span')
+
+    _playHistoryCard.classList.add('play-history-card')
+    _playHistoryMove.classList.add('play-history-move')
+    _playHistoryPlayerWrapper.classList.add('play-history-player-wrapper')
+    _playHistoryPlayer.classList.add('play-history-player')
+    _playHistoryField.classList.add('play-history-field')
+
+    $playHistoryList.appendChild(_playHistoryCard)
+    _playHistoryCard.appendChild(_playHistoryMove)
+    _playHistoryCard.appendChild(_playHistoryPlayerWrapper)
+    _playHistoryMove.appendChild(_spanMove)
+    _playHistoryPlayerWrapper.appendChild(_playHistoryPlayer)
+    _playHistoryPlayerWrapper.appendChild(_playHistoryField)
+
+    _spanMove.textContent = move
+    _playHistoryPlayer.textContent = playerName
+    _playHistoryField.textContent = fieldIndex
 }
 
 function getPlayerName(playerMove){
