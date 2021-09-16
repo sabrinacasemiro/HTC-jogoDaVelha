@@ -42,6 +42,7 @@ const diagonal1 = [$playingFieldList[0], $playingFieldList[4], $playingFieldList
 const diagonal2 = [$playingFieldList[2], $playingFieldList[4], $playingFieldList[6]]
 
 const linesToVerify = [horizontal1, horizontal2, horizontal3, vertical1, vertical2, vertical3, diagonal1, diagonal2]
+const historyMoveList = []
 
 let currentMove = 'X'
 let winner =  ''
@@ -127,6 +128,7 @@ function resetField(){
 function resetVar(){
     winner = ''
     currentMove = 'X'
+    historyMoveList.length = 0
 }
 
 function resetWinnerScoreboard(){
@@ -228,8 +230,34 @@ function getScenery(){
     return scenery
 }
 
+const buildHistoryMoveList = () => {
+    const scenary = getScenery()
+
+    historyMoveList.push(scenary)
+}
+
+const printScenary = (scenary) => {
+    for(let i = 0; i < scenary.length; i++){
+        const playingField = $playingFieldList[i]
+        const move = scenary[i]
+
+        playingField.textContent = move
+    }
+}
+
+const getMoveQuantity = () => {
+    let index = -1
+
+    for(const $playingField of $playingFieldList){
+        if($playingField.textContent) index++
+    }
+
+    return index
+}
+
 function printMoveHistory(move, fieldIndex){
     const playerName = getPlayerName(move)
+    const currentMoveIndex = getMoveQuantity()
 
     const _playHistoryCard = document.createElement('button')
     const _playHistoryMove = document.createElement('div')
@@ -254,6 +282,14 @@ function printMoveHistory(move, fieldIndex){
     _spanMove.textContent = move
     _playHistoryPlayer.textContent = playerName
     _playHistoryField.textContent = fieldIndex
+
+    _playHistoryCard.setAttribute('index', currentMoveIndex)
+
+    _playHistoryCard.addEventListener('click', () => {
+        const myScenery = historyMoveList[currentMoveIndex]
+
+        printScenary(myScenery)
+    })
 }
 
 function getPlayerName(playerMove){
@@ -288,6 +324,7 @@ function botPlay(){
         const positionText = getPositionText(botMove)
     printMove($playingField)
     printMoveHistory(currentMove, positionText)
+    buildHistoryMoveList()
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
@@ -314,6 +351,7 @@ for(let i = 0; i < $playingFieldList.length; i++){
         const positionText = getPositionText(i)
     printMove($playingField)
     printMoveHistory(currentMove, positionText)
+    buildHistoryMoveList()
     verifyWinner()
     if(winner){
         stopGameForAMoment(1500)
