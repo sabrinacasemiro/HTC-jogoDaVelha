@@ -4,16 +4,6 @@ const $switcherMD = document.querySelector('.box-type-switcher')
 const $buttonStart = document.querySelector('.button-start')
 const $buttonRestart = document.querySelector('.button-restart')
 
-const $playingField0 = document.querySelector('.playing-field0')
-const $playingField1 = document.querySelector('.playing-field1')
-const $playingField2 = document.querySelector('.playing-field2')
-const $playingField3 = document.querySelector('.playing-field3')
-const $playingField4 = document.querySelector('.playing-field4')
-const $playingField5 = document.querySelector('.playing-field5')
-const $playingField6 = document.querySelector('.playing-field6')
-const $playingField7 = document.querySelector('.playing-field7')
-const $playingField8 = document.querySelector('.playing-field8')
-
 const $playingFieldList = document.querySelectorAll('.playing-field')
 
 const $winnerScoreboard = document.querySelector(".winner-scoreboard")
@@ -51,6 +41,7 @@ let scorePlayer2 = 0
 let start = false
 let bot = false
 let winnerHistoryName = ''
+let clicked = false
 
 function toggleMoveVar(){
     if(currentMove == 'O'){
@@ -313,6 +304,16 @@ function botMoveIndex(){
     return Math.floor(Math.random() * 9) 
 }
 
+const verifyMD = () => {
+    if(clicked && scorePlayer1 === 3 || scorePlayer2 === 3){
+    return true
+}else if(!clicked && scorePlayer1 === 2 || scorePlayer2 === 2){
+    return true
+} else{
+    return false
+}
+}
+
 function botPlay(){
     const botMove = botMoveIndex()
     const $playingField = $playingFieldList[botMove]
@@ -333,6 +334,17 @@ function botPlay(){
         printMatch()
         printPoint()
         printMatchHistory()
+        if(verifyMD()){
+            setTimeout(function(){
+                resetField()
+                resetVar()
+                resetWinnerScoreboard()
+                resetMoveHistory()
+                resetPointScoreboard()
+                resetScorePlayer()
+                resetMatchHistory()
+            }, 1500)
+        }
         setTimeout(function(){
             resetField()
             resetVar()
@@ -360,6 +372,17 @@ for(let i = 0; i < $playingFieldList.length; i++){
         printMatch()
         printPoint()
         printMatchHistory()
+        if(verifyMD()){
+            setTimeout(function(){
+                resetField()
+                resetVar()
+                resetWinnerScoreboard()
+                resetMoveHistory()
+                resetPointScoreboard()
+                resetScorePlayer()
+                resetMatchHistory()
+            }, 1500)
+        }
         setTimeout(function(){
             resetField()
             resetVar()
@@ -376,10 +399,18 @@ for(let i = 0; i < $playingFieldList.length; i++){
 $switcherBot.addEventListener('click', function(){
     $switcherBot.classList.toggle('switcher-active')
     bot = !bot
+    if(bot){
+        $namePlayer2.disabled = true
+        $namePlayer2.value = 'BOT'
+    } else{
+        $namePlayer2.disabled = false
+        $namePlayer2.value = ''
+    }
 })
 
 $switcherMD.addEventListener('click', function(){
     $switcherMD.classList.toggle('type-switcher5')
+    clicked = !clicked
 })
 
 $buttonStart.addEventListener('click', function(){
